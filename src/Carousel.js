@@ -28,18 +28,23 @@ function Carousel({ photos, title }) {
     setCurrCardIdx(currCardIdx - 1);
   }
 
+  const rightArrowHidden = currCardIdx === total-1;
+  const leftArrowHidden = currCardIdx === 0;
+
+  // debug("final",rightArrowHidden,"first,",leftArrowHidden)
+
   return (
     <div className="Carousel">
       <h1>{title}</h1>
       <div className="Carousel-main">
-        <i className="fas fa-chevron-circle-left fa-2x" onClick={goBackward} />
+        {!leftArrowHidden && <i className="fas fa-chevron-circle-left fa-2x" onClick={goBackward} />}
         <Card
           caption={currCard.caption}
           src={currCard.src}
           currNum={currCardIdx + 1}
           totalNum={total}
         />
-        <i className="fas fa-chevron-circle-right fa-2x" onClick={goForward} />
+        {!rightArrowHidden && <i className="fas fa-chevron-circle-right fa-2x" onClick={goForward} />}
       </div>
     </div>
   );

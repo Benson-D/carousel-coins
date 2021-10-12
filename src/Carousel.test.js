@@ -44,6 +44,13 @@ it("works when you click on the left arrow", function () {
   const { container } = render(
     <Carousel photos={TEST_IMAGES} title="images for testing" />
   );
+
+  expect(
+    container.querySelector('img[alt="testing image 2"]')
+  ).not.toBeInTheDocument();
+  expect(
+    container.querySelector('img[alt="testing image 1"]')
+  ).toBeInTheDocument();
   // expect the first image to show, but not the second
   const rightArrow = container.querySelector(".fa-chevron-circle-right");
   fireEvent.click(rightArrow);
@@ -66,4 +73,32 @@ it("works when you click on the left arrow", function () {
   expect(
     container.querySelector('img[alt="testing image 1"]')
   ).toBeInTheDocument();
+});
+
+
+it("hides left arrow on first image, hides right arrow on last image", function () {
+  const { container } = render(
+    <Carousel photos={TEST_IMAGES} title="images for testing" />
+  );
+
+  const rightArrow = container.querySelector(".fa-chevron-circle-right");
+
+  expect(
+    container.querySelector(".fa-chevron-circle-left")
+  ).not.toBeInTheDocument();
+  expect(
+    container.querySelector(".fa-chevron-circle-right")
+  ).toBeInTheDocument();
+
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+
+  expect(
+    container.querySelector(".fa-chevron-circle-left")
+  ).toBeInTheDocument();
+  expect(
+    container.querySelector(".fa-chevron-circle-right")
+  ).not.toBeInTheDocument();
+
+
 });

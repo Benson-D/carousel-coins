@@ -4,7 +4,6 @@ import Card from "./Card";
 import TEST_IMAGES from "./_testCommon";
 
 it("renders without crashing", function () {
-  // this is a low-value test, but better than nothing
   render(
     <Card
       caption={TEST_IMAGES[0].caption}
